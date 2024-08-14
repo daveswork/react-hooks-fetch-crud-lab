@@ -26,10 +26,22 @@ function App() {
     setQuestionItemList(updatedQuestionList)
   }
 
+  function updateCorrectAnswer(id, newAnswer){
+    const newQuestionList = questionItemList.map(question => {
+      if(question.id === id){
+        question.correctIndex = newAnswer
+        return question
+      } else {
+        return question
+      }
+    })
+    setQuestionItemList(newQuestionList)
+  }
+
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm onSubmitHandler={addNewQuestion} /> : <QuestionList questionItemList={questionItemList} onDelete={removeQuestion}/>}
+      {page === "Form" ? <QuestionForm onSubmitHandler={addNewQuestion} /> : <QuestionList questionItemList={questionItemList} onDelete={removeQuestion} updateCorrectAnswer={updateCorrectAnswer}/>}
     </main>
   );
 }
