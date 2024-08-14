@@ -1,18 +1,10 @@
 import React, {useState, useEffect} from "react";
 import QuestionItem from "./QuestionItem";
 
-function QuestionList() {
-  const [questionItemList, setQuestionItemList] = useState([])
+function QuestionList({questionItemList}) {
 
-  useEffect(()=>{
-    fetch("http://localhost:4000/questions")
-    .then(response => response.json())
-    .then(questions => setQuestionItemList(questions))
-
-  }, [])
-
-  const questionItems = questionItemList.map(question => {
-    return <QuestionItem key={question.id} question={question}/>
+  const questionItems = questionItemList.map((question, index) => {
+    return <QuestionItem key={index} question={question}/>
   })
 
   return (
